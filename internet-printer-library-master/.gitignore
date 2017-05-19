@@ -1,0 +1,17 @@
+/.gradle/
+/.nb-gradle/
+/build/
+/lib/
+/settings.gradle
+/.nb-gradle-properties
+/.gradle/2.7/taskArtifacts/cache.properties
+/.gradle/2.7/taskArtifacts/cache.properties.lock
+/.gradle/2.7/taskArtifacts/fileHashes.bin
+/.gradle/2.7/taskArtifacts/fileSnapshots.bin
+/.gradle/2.7/taskArtifacts/outputFileStates.bin
+/.gradle/2.7/taskArtifacts/taskArtifacts.bin
+/src/main/java/BocaExample.java
+/src/main/java/BocaPrinter.java
+/src/main/java/BocaTicket.java
+/src/main/java/Constants.java
+/src/main/java/PrintExample.java
