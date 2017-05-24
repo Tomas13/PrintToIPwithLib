@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.maxxton.printer.PrintDocument;
+import com.maxxton.printer.PrintException;
 import com.maxxton.printer.PrintFormatException;
 import com.maxxton.printer.PrintProtocol;
 import com.maxxton.printer.Printer;
@@ -39,7 +41,20 @@ public class MainActivity extends AppCompatActivity {
 
 //        doWebViewPrint();
 
-        new RetrieveFeedTask().execute();
+        try{
+
+            new RetrieveFeedTask().execute();
+        }catch (Exception e){
+            write(e.getMessage());
+        }
+    }
+    
+    private void write(String msg){
+        runOnUiThread(() -> {
+            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+        });
+
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     class RetrieveFeedTask extends AsyncTask<String, Void, Void> {
@@ -52,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 this.exception = e;
 
+
                 return null;
             }
 
@@ -61,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void feed) {
             // TODO: check this.exception
             // TODO: do something with the feed
+
+            if (this.exception != null){
+
+                runOnUiThread(() -> {
+                    Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
         }
     }
 
@@ -83,7 +106,10 @@ public class MainActivity extends AppCompatActivity {
             oStream.close();
             sock.close();
 */
-        } catch (PrintFormatException e) {
+        } catch (Exception e) {
+
+
+            write(e.getMessage());
             e.printStackTrace();
         }
     }
