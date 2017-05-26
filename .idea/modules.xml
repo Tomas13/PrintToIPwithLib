@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Print.iml" filepath="$PROJECT_DIR$/Print.iml" />
       <module fileurl="file://$PROJECT_DIR$/Print-master.iml" filepath="$PROJECT_DIR$/Print-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PrintToIPwithLib.iml" filepath="$PROJECT_DIR$/PrintToIPwithLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/internet-printer-library-master/internet-printer-library-master.iml" filepath="$PROJECT_DIR$/internet-printer-library-master/internet-printer-library-master.iml" />
     </modules>
