@@ -17,12 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.maxxton.printer.PrintDocument;
-import com.maxxton.printer.PrintException;
-import com.maxxton.printer.PrintFormatException;
 import com.maxxton.printer.PrintProtocol;
 import com.maxxton.printer.Printer;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -54,21 +51,10 @@ public class MainActivity extends AppCompatActivity {
         mConversationArrayAdapter = new ArrayAdapter<String>(this, R.id.remote_device);
 
         connectToDevice("10.62.10.153");
-        try {
 
-            new RetrieveFeedTask().execute();
-        } catch (Exception e) {
-            write(e.getMessage());
-        }
+        new RetrieveFeedTask().execute();
     }
 
-    private void write(String msg) {
-        runOnUiThread(() -> {
-            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-        });
-
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
 
     class RetrieveFeedTask extends AsyncTask<String, Void, Void> {
 
@@ -142,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     CustomAndroidAPI.EnumEthernetDevices(5000, getApplicationContext());
 
 //            Log.d("Jean", ethPrin.length + "");
+
             prnDevice = new CustomAndroidAPI()
                     .getPrinterDriverETH(iAddress.getHostAddress());
             prnDevice.feed(1);
@@ -151,22 +138,11 @@ public class MainActivity extends AppCompatActivity {
             prnDevice.printText("Куда Участок МЖД и ПК г.Астана [220081]");
             prnDevice.printText("Куда Участок сортировки письменной [220097]");
 
-
             prnDevice.printText("\t\tВес 10.750 кг");
             prnDevice.printText("Пломба № 1987621");
 
 
-            Socket sock = new Socket("10.62.10.153", 9100);
-            PrintWriter oStream = new PrintWriter(sock.getOutputStream());
-            oStream.println("HI,test from Android Device");
-            Log.d("He", "here");
-            oStream.println("\n\n\n\f");
-            oStream.close();
-            sock.close();
         } catch (Exception e) {
-
-
-            write(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -186,10 +162,10 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             iAddress = InetAddress.getByName(remote);
-        }catch (UnknownHostException e){
+        } catch (UnknownHostException e) {
             Toast.makeText(this, "Invalid IP host", Toast.LENGTH_SHORT)
                     .show();
-            remote=null;
+            remote = null;
         }
 
         if (remote != null) {
@@ -201,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ipPrintFile ipPrintService = null;
+
     void setConnectState(Integer iState) {
         switch (iState) {
             case ipPrintFile.STATE_CONNECTED:
@@ -222,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Main", "unknown state var " + iState.toString());
         }
     }
+
     private static final boolean D = true;
     private String mConnectedDeviceName = null;
     private ArrayAdapter<String> mConversationArrayAdapter;
